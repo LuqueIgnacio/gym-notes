@@ -4,9 +4,9 @@ import BaseButton from './BaseButton'
 import TrashIcon from '../icons/TrashIcon'
 
 export default function TrashButton(props) {
-    const {width, height} = props
+    const {width, height, onPress} = props
   return (
-    <BaseButton>
+    <BaseButton onPress={onPress}>
         <TrashIcon width={width} height={height}></TrashIcon>
     </BaseButton>
   )

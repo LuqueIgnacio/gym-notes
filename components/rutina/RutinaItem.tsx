@@ -15,7 +15,7 @@ export default function RutinaItem(props) {
             <Text className="text-lg font-bold">{props.rutina.name}</Text>
         </View>
         <View className="flex-row justify-center space-x-3">
-            <DumbellButton onPress={() => router.push(rutinaRoutes.agregarRutinaCabecera("Torso"))} width={30} height={30}/>
+            <DumbellButton onPress={() => router.push(rutinaRoutes.agregarRutinaCabecera(rutina.name))} width={30} height={30}/>
             <PencilButton width={30} height={30}/>
             <TrashButton width={30} height={30}/>
         </View>
