@@ -1,15 +1,14 @@
-import { Pressable } from 'react-native'
+import { Pressable, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 
 export default function BaseButton(props) {
-    const [styles, setStyles] = useState("p-1 rounded-lg bg-gray-50")
+
   return (
-    <Pressable 
-        className={styles}
+    <TouchableOpacity 
+        className={"p-1 rounded-xl bg-gray-50 " + props.style}
         onPress={props.onPress}                   
-        onPressIn={() => {setStyles("p-1 rounded-lg bg-gray-100")}} 
-        onPressOut={() => {setStyles("p-1 rounded-lg bg-gray-50")}}>
+       >
             {props.children}
-    </Pressable>
+    </TouchableOpacity>
   )
 }
