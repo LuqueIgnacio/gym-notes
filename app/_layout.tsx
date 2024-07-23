@@ -17,6 +17,10 @@ export default function IndexLayout(){
                 name={rutinaRoutes.agregarRutina}
                 options={{title: "Crear Rutina"}}
             />
+            <Stack.Screen
+                name={rutinaRoutes.editarRutina()}
+                options={{title: "Editar Rutina"}}
+            />
         </Stack>
     )
 }

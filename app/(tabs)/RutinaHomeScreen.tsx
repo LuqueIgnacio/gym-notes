@@ -8,9 +8,9 @@ import { rutinaRoutes } from '@/constants/Routes';
 export default function RutinaHomeScreen() {
   const router = useRouter()
   const rutina = [
-    {name: "Torso"},
-    {name: "Pierna"},
-    {name: "Espalda"},
+    {id: 1, name: "Torso"},
+    {id: 2, name: "Pierna"},
+    {id: 3, name: "Espalda"},
   ]
 
   return (
