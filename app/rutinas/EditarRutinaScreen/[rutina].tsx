@@ -2,7 +2,7 @@ import ModifyRutina from '@/components/rutina/ModifyRutina';
 import { useState } from 'react';
 import uuid from "react-native-uuid"
 
-export default function AgregarRutinaScreen() {
+export default function EditarRutinaScreen() {
   
   const [ejercicios, setEjercicios] = useState(
   [
@@ -15,7 +15,7 @@ export default function AgregarRutinaScreen() {
     <ModifyRutina 
       ejerciciosState={[ejercicios, setEjercicios]} 
       cantidadEjerciciosSeleccionadosState={[cantidadEjerciciosSeleccionados, setCantidadEjerciciosSeleccionados]} 
-      onSave={() => console.log("gorriadooo")}
+      onSave={() => console.log("el venao")}
     />
   )
 }
