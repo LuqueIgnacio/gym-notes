@@ -12,14 +12,15 @@ export default function IndexLayout(){
             }}/>
             <Stack.Screen
                 name={rutinaRoutes.agregarRutinaCabecera()}
+                options={{headerTitleAlign: "center"}}
             />
             <Stack.Screen
                 name={rutinaRoutes.agregarRutina}
-                options={{title: "Crear Rutina"}}
+                options={{title: "Crear Rutina", headerTitleAlign: "center"}}
             />
             <Stack.Screen
                 name={rutinaRoutes.editarRutina()}
-                options={{title: "Editar Rutina"}}
+                options={{title: "Editar Rutina", headerTitleAlign: "center"}}
             />
         </Stack>
     )
