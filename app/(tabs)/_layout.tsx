@@ -24,6 +24,7 @@ export default function TabLayout() {
         name={rutinaRoutes.rutinaHome}
         options={{
           title: 'Rutinas', 
+          headerTitleAlign: "center",
           tabBarIcon: () => (
             <DumbellIcon/>
           ),
@@ -33,7 +34,8 @@ export default function TabLayout() {
       <Tabs.Screen
         name={agendaPesoHome}
         options={{
-          title: 'Peso', 
+          title: 'Libreta de peso', 
+          headerTitleAlign: "center",
           tabBarIcon: ({ color, focused }) => (
             <BalanceIcon/>
           ),
