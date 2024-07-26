@@ -1,0 +1,319 @@
+{
+  "version": "6",
+  "dialect": "sqlite",
+  "id": "5423810d-0974-4117-af55-b93a517e8353",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "tables": {
+    "actividad": {
+      "name": "actividad",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "huboActividad": {
+          "name": "huboActividad",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "fecha": {
+          "name": "fecha",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "ejercicio": {
+      "name": "ejercicio",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "peso": {
+      "name": "peso",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "peso": {
+          "name": "peso",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "fecha": {
+          "name": "fecha",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "rutina": {
+      "name": "rutina",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "blob",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "RutinaCabecera": {
+      "name": "RutinaCabecera",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "blob",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "idRutina": {
+          "name": "idRutina",
+          "type": "blob",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "fecha": {
+          "name": "fecha",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "tiempoInicio": {
+          "name": "tiempoInicio",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "tiempoFinal": {
+          "name": "tiempoFinal",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "RutinaCabecera_idRutina_rutina_id_fk": {
+          "name": "RutinaCabecera_idRutina_rutina_id_fk",
+          "tableFrom": "RutinaCabecera",
+          "tableTo": "rutina",
+          "columnsFrom": [
+            "idRutina"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "RutinaDetalle": {
+      "name": "RutinaDetalle",
+      "columns": {
+        "idRutinaCabecera": {
+          "name": "idRutinaCabecera",
+          "type": "blob",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "idEjercicio": {
+          "name": "idEjercicio",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "numeroSerie": {
+          "name": "numeroSerie",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "peso": {
+          "name": "peso",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "reps": {
+          "name": "reps",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "RutinaDetalle_idRutinaCabecera_RutinaCabecera_id_fk": {
+          "name": "RutinaDetalle_idRutinaCabecera_RutinaCabecera_id_fk",
+          "tableFrom": "RutinaDetalle",
+          "tableTo": "RutinaCabecera",
+          "columnsFrom": [
+            "idRutinaCabecera"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "RutinaDetalle_idEjercicio_ejercicio_id_fk": {
+          "name": "RutinaDetalle_idEjercicio_ejercicio_id_fk",
+          "tableFrom": "RutinaDetalle",
+          "tableTo": "ejercicio",
+          "columnsFrom": [
+            "idEjercicio"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "RutinaDetalle_idEjercicio_idRutinaCabecera_numeroSerie_pk": {
+          "columns": [
+            "idEjercicio",
+            "idRutinaCabecera",
+            "numeroSerie"
+          ],
+          "name": "RutinaDetalle_idEjercicio_idRutinaCabecera_numeroSerie_pk"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "Rutina-Ejercicio": {
+      "name": "Rutina-Ejercicio",
+      "columns": {
+        "rutinaId": {
+          "name": "rutinaId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "ejercicioId": {
+          "name": "ejercicioId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "Rutina-Ejercicio_rutinaId_rutina_id_fk": {
+          "name": "Rutina-Ejercicio_rutinaId_rutina_id_fk",
+          "tableFrom": "Rutina-Ejercicio",
+          "tableTo": "rutina",
+          "columnsFrom": [
+            "rutinaId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "Rutina-Ejercicio_ejercicioId_ejercicio_id_fk": {
+          "name": "Rutina-Ejercicio_ejercicioId_ejercicio_id_fk",
+          "tableFrom": "Rutina-Ejercicio",
+          "tableTo": "ejercicio",
+          "columnsFrom": [
+            "ejercicioId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "Rutina-Ejercicio_rutinaId_ejercicioId_pk": {
+          "columns": [
+            "ejercicioId",
+            "rutinaId"
+          ],
+          "name": "Rutina-Ejercicio_rutinaId_ejercicioId_pk"
+        }
+      },
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "indexes": {}
+  }
+}
