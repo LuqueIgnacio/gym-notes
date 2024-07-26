@@ -6,24 +6,18 @@ import { useState } from "react";
 import { View, TextInput, FlatList } from "react-native";
 import uuid from "react-native-uuid";
 
-export default function ModifyRutina({cantidadEjerciciosSeleccionadosState, ejerciciosSeleccionadosState, onSave, ejerciciosState}) {
+export default function ModifyRutina({nombreRutinaState, cantidadEjerciciosSeleccionadosState, ejerciciosSeleccionadosState, onSave, ejerciciosState}) {
+  const [nombreRutina, setNombreRutina] = nombreRutinaState;
   const [ejerciciosSeleccionados, setEjerciciosSeleccionados] = ejerciciosSeleccionadosState;
   const [cantidadEjerciciosSeleccionados, setCantidadEjerciciosSeleccionados] = cantidadEjerciciosSeleccionadosState;
   const [data, setData] = ejerciciosState
-  /*useState([
-    { id: 1, title: "Press Banca", isSelected: true },
-    { id: 2, title: "Press Militar", isSelected: false },
-    { id: 3, title: "Fondos", isSelected: false },
-    { id: 4, title: "Dominadas", isSelected: false },
-  ]);
-  */
 
   const handleOnSelect = (index: number, ejercicio) => {
     const newEjercicios = ejerciciosSeleccionados.slice(0);
     const newData = data.slice(0);
     let newCantidadEjerciciosSeleccionados =
       cantidadEjerciciosSeleccionados + 1;
-    newEjercicios[index] = {
+      newEjercicios[index] = {
       id: ejercicio.id,
       name: ejercicio.name,
       key: ejerciciosSeleccionados[index].key,
@@ -73,6 +67,7 @@ export default function ModifyRutina({cantidadEjerciciosSeleccionadosState, ejer
               placeholder="Nombre Rutina"
               textAlign="center"
               maxLength={20}
+              onChangeText={(text) => setNombreRutina(text)}
             ></TextInput>
           </View>
         </ItemListContainer>
@@ -100,7 +95,7 @@ export default function ModifyRutina({cantidadEjerciciosSeleccionadosState, ejer
         {ejerciciosSeleccionados.length != data.length ? (
           <CirclePlusButton width={40} height={40} onPress={addItem} />
         ) : null}
-        <CircleCheckButton width={40} height={40} onPress={onSave} />
+        <CircleCheckButton width={40} height={40} onPress={() => onSave()} />
       </View>
     </>
   );
