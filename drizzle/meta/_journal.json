@@ -1,0 +1,13 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1721968964576,
+      "tag": "0000_shocking_sister_grimm",
+      "breakpoints": true
+    }
+  ]
+}
