@@ -1,35 +1,34 @@
 import ModifyRutina from '@/components/rutina/ModifyRutina';
 import { addEjercicio } from '@/services/EjercicioService';
-import { getAllEjercicios } from '@/services/RutinasServices';
+import { addRutina, getAllEjercicios, getAllEjerciciosForDropwdown, getAllRutinas } from '@/services/RutinasServices';
 import { useEffect, useState } from 'react';
-import uuid from "react-native-uuid"
 
 export default function AgregarRutinaScreen() {
   
+  const [nombreRutina, setNombreRutina] = useState("")
   const [ejerciciosSeleccionados, setEjerciciosSeleccionados] = useState([])
   const [cantidadEjerciciosSeleccionados, setCantidadEjerciciosSeleccionados] = useState(ejerciciosSeleccionados.length)
   const [ejercicios, setEjercicios] = useState([])
 
+  const onSave = async () =>{
+    const ejer = ejerciciosSeleccionados.slice().map( e => {
+      delete e.key
+      return e
+    })
+    await addRutina({name: nombreRutina, ejercicios: ejer})
+  }
+
   useEffect(() =>{
-    const fechtData = async () =>{
-      let data = await getAllEjercicios()
-      data = data.map( d => {
-        d.title = d.name
-        d.isSelected = false
-        return d
-      })
-      console.log(data)
-      setEjercicios(data)
-    }
-    fechtData()
+    getAllEjerciciosForDropwdown().then( ejerciciosDropdown => setEjercicios(ejerciciosDropdown))
   }, [])
   
   return(
     <ModifyRutina 
+      nombreRutinaState={[nombreRutina, setNombreRutina]}
       ejerciciosSeleccionadosState={[ejerciciosSeleccionados, setEjerciciosSeleccionados]} 
       cantidadEjerciciosSeleccionadosState={[cantidadEjerciciosSeleccionados, setCantidadEjerciciosSeleccionados]}
       ejerciciosState={[ejercicios, setEjercicios]} 
-      onSave={() => console.log("gorriadooo")}
+      onSave={onSave}
     />
   )
 }
