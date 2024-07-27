@@ -11,6 +11,13 @@ import { useAppContext } from '@/hooks/useAppContext';
 export default function RutinaHomeScreen() {
   const router = useRouter()
   const [rutinas, setRutinas] = useAppContext()
+  const onTrashButtonClick = async (rutina) =>{
+    await deleteRutina(rutina)
+    const newRutinas = rutinas.slice()
+    const index = newRutinas.findIndex(r => r.id === rutina.id)
+    newRutinas.splice(index, 1)
+    setRutinas(newRutinas)
+  }
   useEffect(() =>{
     getAllRutinas().then(fetchedRutinas => setRutinas(fetchedRutinas))
   }, [])
@@ -24,7 +31,7 @@ export default function RutinaHomeScreen() {
       renderItem={({item}) => {
         return(
           <ItemListContainer style="flex-row justify-between items-center">
-            <RutinaItem rutina={item}></RutinaItem>
+            <RutinaItem rutina={item} onTrashButtonClick={onTrashButtonClick}></RutinaItem>
           </ItemListContainer>
         )
       }}

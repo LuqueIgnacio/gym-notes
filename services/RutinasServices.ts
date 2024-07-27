@@ -1,5 +1,6 @@
 import db from "../db/database"
 import { Users, Rutina, Ejercicio, RutinaToEjercicio } from "@/db/schema"
+import { eq } from "drizzle-orm"
 import uuid from "react-native-uuid"
 
 export async function getAllRutinas(){
@@ -13,8 +14,8 @@ export async function addRutina(rutina){
     await db.insert(RutinaToEjercicio).values(ejercicios)
 }
 
-export async function deleteRutina(){
-    return await db.delete(Users)
+export async function deleteRutina(rutina){
+    return await db.delete(Rutina).where(eq(Rutina.id, rutina.id)) 
 }
 
 export async function getAllEjercicios(){
