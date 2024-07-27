@@ -6,32 +6,21 @@ import { View, Text, Button, FlatList } from 'react-native';
 import { rutinaRoutes } from '@/constants/Routes';
 import {getAllRutinas, addRutina, deleteRutina} from '@/services/RutinasServices'
 import { useEffect, useState } from 'react';
+import { useAppContext } from '@/hooks/useAppContext';
 
 export default function RutinaHomeScreen() {
-  console.log( getAllRutinas())
   const router = useRouter()
-  const rutina = [
-    {id: 1, name: "Torso"},
-    {id: 2, name: "Pierna"},
-    {id: 3, name: "Espalda"},
-  ]
-  const [datos, setDatos] = useState([])
+  const [rutinas, setRutinas] = useAppContext()
   useEffect(() =>{
-    const fetchData = async () =>{
-      //await addRutina()
-      //await deleteRutina()
-      const newDatos = await getAllRutinas()
-      
-      console.log(newDatos)
-    }
-    fetchData()
+    getAllRutinas().then(fetchedRutinas => setRutinas(fetchedRutinas))
   }, [])
 
   return (
     <>
     <FlatList
       className="grow-0 "
-      data={rutina}
+      data={rutinas}
+      keyExtractor={rutina => rutina.id}
       renderItem={({item}) => {
         return(
           <ItemListContainer style="flex-row justify-between items-center">
