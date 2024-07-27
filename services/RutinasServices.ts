@@ -3,8 +3,7 @@ import { Users, Rutina, Ejercicio, RutinaToEjercicio } from "@/db/schema"
 import uuid from "react-native-uuid"
 
 export async function getAllRutinas(){
-    console.log(await db.select().from(Rutina), await db.select().from(RutinaToEjercicio))
-    return await db.select().from(RutinaToEjercicio)
+    return await db.select().from(Rutina)
 }
 
 export async function addRutina(rutina){

@@ -8,6 +8,7 @@ import migrations from '../drizzle/migrations';
 import { ProgressBarAndroidComponent } from "react-native";
 import getAllRutinas from "@/services/RutinasServices";
 import db from "@/db/database";
+import { AppProvider } from "@/context/AppProvider";
 
 
 
@@ -28,25 +29,27 @@ export default function IndexLayout(){
     }
     
     return(
-        <Stack initialRouteName="(tabs)/RutinaHomeScreen">
-            <Stack.Screen 
-                name="(tabs)" 
-                options={{
-                    headerShown: false,
+        <AppProvider>
+            <Stack initialRouteName="(tabs)/RutinaHomeScreen">
+                <Stack.Screen 
+                    name="(tabs)" 
+                    options={{
+                        headerShown: false,
 
-            }}/>
-            <Stack.Screen
-                name={rutinaRoutes.agregarRutinaCabecera()}
-                options={{headerTitleAlign: "center"}}
-            />
-            <Stack.Screen
-                name={rutinaRoutes.agregarRutina}
-                options={{title: "Crear Rutina", headerTitleAlign: "center"}}
-            />
-            <Stack.Screen
-                name={rutinaRoutes.editarRutina()}
-                options={{title: "Editar Rutina", headerTitleAlign: "center"}}
-            />
-        </Stack>
+                }}/>
+                <Stack.Screen
+                    name={rutinaRoutes.agregarRutinaCabecera()}
+                    options={{headerTitleAlign: "center"}}
+                />
+                <Stack.Screen
+                    name={rutinaRoutes.agregarRutina}
+                    options={{title: "Crear Rutina", headerTitleAlign: "center"}}
+                />
+                <Stack.Screen
+                    name={rutinaRoutes.editarRutina()}
+                    options={{title: "Editar Rutina", headerTitleAlign: "center"}}
+                />
+            </Stack>
+        </AppProvider>
     )
 }
