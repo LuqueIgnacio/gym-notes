@@ -1,7 +1,7 @@
 import ModifyRutina from '@/components/rutina/ModifyRutina';
 import { useAppContext } from '@/hooks/useAppContext';
 import { addEjercicio } from '@/services/EjercicioService';
-import { addRutina, getAllEjercicios, getAllEjerciciosForDropwdown, getAllRutinas } from '@/services/RutinasServices';
+import { addRutina, getAllEjercicios, getAllEjerciciosForDropwdown, getAllRutinas, prepareDataForSaveRutina } from '@/services/RutinasServices';
 import { useEffect, useState } from 'react';
 
 export default function AgregarRutinaScreen() {
@@ -13,11 +13,7 @@ export default function AgregarRutinaScreen() {
   const [rutina, setRutina] = useAppContext()
 
   const onSave = async () =>{
-    const ejer = ejerciciosSeleccionados.slice().map( e => {
-      delete e.key
-      return e
-    })
-    await addRutina({name: nombreRutina, ejercicios: ejer})
+    await addRutina( prepareDataForSaveRutina({name: nombreRutina}, ejerciciosSeleccionados))
     setRutina(await getAllRutinas())
   }
 
