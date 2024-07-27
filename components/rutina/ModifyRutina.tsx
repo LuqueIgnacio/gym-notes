@@ -68,6 +68,7 @@ export default function ModifyRutina({nombreRutinaState, cantidadEjerciciosSelec
               textAlign="center"
               maxLength={20}
               onChangeText={(text) => setNombreRutina(text)}
+              defaultValue={nombreRutina}
             ></TextInput>
           </View>
         </ItemListContainer>
