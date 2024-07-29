@@ -1,16 +1,17 @@
 import ModifyRutina from '@/components/rutina/ModifyRutina';
 import { useAppContext } from '@/hooks/useAppContext';
 import { editRutina, getAllEjerciciosForDropwdown, getAllRutinas, getRutinaWithEjercicios, prepareDataForModifyRutinaComponent, prepareDataForSaveRutina } from '@/services/RutinasServices';
+import { EjercicioDropdownType, EjercicioSeleccionado } from '@/types/types';
 import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
 import uuid from "react-native-uuid"
 
 export default function EditarRutinaScreen() {
   
-  const [nombreRutina, setNombreRutina] = useState("")
-  const [ejerciciosSeleccionados, setEjerciciosSeleccionados] = useState([])
+  const [nombreRutina, setNombreRutina] = useState<string | null>("")
+  const [ejerciciosSeleccionados, setEjerciciosSeleccionados] = useState<EjercicioSeleccionado[]>([])
   const [cantidadEjerciciosSeleccionados, setCantidadEjerciciosSeleccionados] = useState(ejerciciosSeleccionados.length)
-  const [ejercicios, setEjercicios] = useState([])
+  const [ejercicios, setEjercicios] = useState<EjercicioDropdownType[]>([])
   const [rutina, setRutina] = useAppContext()
   const params = useLocalSearchParams()
 
@@ -23,6 +24,9 @@ export default function EditarRutinaScreen() {
   useEffect(() =>{
     const fechtData = async () =>{
       const rutinaWithEjercicios = await getRutinaWithEjercicios(params.rutina)
+      if(!rutinaWithEjercicios){
+        return
+      }
       const {ejerciciosSeleccionados: newEjerciciosSeleccionados,
          ejerciciosDropdown} = prepareDataForModifyRutinaComponent(rutinaWithEjercicios, await getAllEjerciciosForDropwdown())
       setNombreRutina(rutinaWithEjercicios.name)

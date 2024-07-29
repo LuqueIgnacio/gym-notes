@@ -2,7 +2,7 @@ import db from "../db/database"
 import { Users, Rutina, Ejercicio, RutinaToEjercicio } from "@/db/schema"
 import { eq } from "drizzle-orm"
 import uuid from "react-native-uuid"
-import { EjercicioSeleccionado, Ejercicio as EjercicioType, RutinaType, RutinaToEjercicioType, RutinaWithEjerciciosType, RutinaWithRutinaToEjercicioType, EjercicioDropdownType } from "@/types/types"
+import { EjercicioSeleccionado, EjercicioType, RutinaType, RutinaToEjercicioType, RutinaWithEjerciciosType, RutinaWithRutinaToEjercicioType, EjercicioDropdownType } from "@/types/types"
 
 export async function getAllRutinas(){
     return await db.select().from(Rutina)
