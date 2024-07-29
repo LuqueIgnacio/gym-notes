@@ -1,6 +1,5 @@
 import { Rutina as RutinaSchema, Ejercicio as EjercicioSchema, RutinaToEjercicio, Rutina } from "@/db/schema"
 import { type InferSelectModel } from 'drizzle-orm'
-//export type RutinaType = typeof RutinaSchema.$inferSelect
 export type EjercicioType = typeof EjercicioSchema.$inferSelect 
 export type RutinaToEjercicioType = typeof RutinaToEjercicio.$inferSelect
 
