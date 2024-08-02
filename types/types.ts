@@ -1,7 +1,10 @@
-import { Rutina as RutinaSchema, Ejercicio as EjercicioSchema, RutinaToEjercicio, Rutina } from "@/db/schema"
+import {Ejercicio as EjercicioSchema, RutinaToEjercicio, Rutina, RutinaCabecera, RutinaDetalle } from "@/db/schema"
 import { type InferSelectModel } from 'drizzle-orm'
+
 export type EjercicioType = typeof EjercicioSchema.$inferSelect 
 export type RutinaToEjercicioType = typeof RutinaToEjercicio.$inferSelect
+export type RutinaCabeceraType = typeof RutinaCabecera.$inferSelect
+export type RutinaDetalleType = typeof RutinaDetalle.$inferSelect
 
 export interface RutinaType extends Omit<InferSelectModel<typeof Rutina>, "id">{
     id?: unknown
@@ -13,6 +16,13 @@ export interface RutinaWithEjerciciosType extends RutinaType{
 
 export interface RutinaWithRutinaToEjercicioType extends RutinaType{
     ejercicios: RutinaToEjercicioType[]
+}
+
+export interface RutinaDetalleWithEjercicio extends RutinaDetalleType{
+    ejercicio: EjercicioType
+}
+export interface RutinaDetalleCompleto extends RutinaCabeceraType{
+    rutinaDetalle: RutinaDetalleWithEjercicio[]
 }
 
 export interface EjercicioSeleccionado extends EjercicioType{
