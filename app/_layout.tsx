@@ -1,12 +1,8 @@
 import { Stack, useLocalSearchParams } from "expo-router";
 import { rutinaRoutes, agendaPesoHome } from '@/constants/Routes';
-
-import { drizzle } from "drizzle-orm/expo-sqlite";
-import { openDatabaseSync } from "expo-sqlite/next";
 import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator';
 import migrations from '../drizzle/migrations';
-import { ProgressBarAndroidComponent } from "react-native";
-import getAllRutinas from "@/services/RutinasServices";
+
 import db from "@/db/database";
 import { AppProvider } from "@/context/AppProvider";
 
