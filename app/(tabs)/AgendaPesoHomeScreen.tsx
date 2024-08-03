@@ -1,34 +1,32 @@
 import PesoItem from "@/components/agendaPeso/PesoItem"
 import CirclePlusButton from "@/components/buttons/CirclePlusButton"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { View, FlatList } from "react-native"
 import AgregarPesoModal from "@/components/agendaPeso/AgregarPesoModal"
 import uuid from "react-native-uuid"
+import { deletePeso, getLastSevenPesos, savePeso } from "@/services/PesoService"
+import { PesoType } from "@/types/types"
 
 export default function AgendaPesoHomeScreen(){
     //Es importante traer estos datos ordenados de menor a mayor
-    const [pesos, setPesos] = useState(
-        [
-            {id: "1", peso: 82, fecha: new Date("2024-7-20")},
-            {id: "2", peso: 82.6, fecha: new Date("2024-7-21")},
-            {id: "3", peso: 82.5, fecha: new Date("2024-7-22")},
-            {id: "4", peso: 83, fecha: new Date("2024-7-23")},
-        ]
-    )
-    const handleOnTrashButtonClick = (index: number) => {
-        const newPesos = pesos.slice()
-        newPesos.splice(index, 1)
-        setPesos(newPesos)
+    const [pesos, setPesos] = useState<PesoType[]>([])
+    const handleOnTrashButtonClick = async (index: number) => {
+        try{
+            await deletePeso(pesos[index].id)
+            const newPesos = pesos.slice()
+            newPesos.splice(index, 1)
+            setPesos(newPesos)
+        }catch(error){
+            //TODO: Agregar feedback para el usuario
+        }
     }
     const [modalVisible, setModalVisible] = useState(false)
     const onCancelButtonPress = () =>{
         setModalVisible(false)
     }
-    const onSaveButtonPress = (peso, fecha) =>{
-        if(fecha.getTime() > new Date().getTime()){
-            return
-        }
-        const newPeso = {id: uuid.v4(), peso: peso, fecha: fecha}
+    const onSaveButtonPress = async (peso: number, fecha: Date) =>{
+        const id = await savePeso({peso, fecha})
+        const newPeso = {id: id, peso: peso, fecha: fecha}
         const newPesos = pesos.slice()
         let index = newPesos.length-1
         for(let i=index; i>=0; i--){
@@ -43,8 +41,14 @@ export default function AgendaPesoHomeScreen(){
             index++
         }
         newPesos.splice(index, 0, newPeso)
+        if(newPesos.length > 7) newPesos.splice(0, 1)
         setPesos(newPesos)
+        setModalVisible(false)
     }
+
+    useEffect( () =>{
+        getLastSevenPesos().then(p => setPesos(p))
+    }, [])
     return(
         <>
         <FlatList

@@ -6,8 +6,9 @@ import CircleCheckButton from '../buttons/CircleCheckButton'
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker'
 
 export default function AgregarPesoModal({onCancelButtonPress, onSaveButtonPress}) {
+    const currentDate = new Date()
     const [peso, setPeso] = useState(0)
-    const [date, setDate] = useState(new Date())
+    const [date, setDate] = useState(currentDate)
     const onChangeDate = (event, selectedDate) =>{
         setDate(selectedDate)
     }
@@ -16,9 +17,10 @@ export default function AgregarPesoModal({onCancelButtonPress, onSaveButtonPress
             {
             value: date,
             onChange: onChangeDate,
-            mode: "date"
+            mode: 'date',
+            maximumDate: currentDate
             })
-    } 
+    }
     return (
         <BaseModal >
             <Text className="text-lg font-bold">Agregar Peso</Text>
