@@ -7,16 +7,22 @@ import { rutinaRoutes } from '@/constants/Routes';
 import {getAllRutinas, addRutina, deleteRutina} from '@/services/RutinasServices'
 import { useEffect, useState } from 'react';
 import { useAppContext } from '@/hooks/useAppContext';
+import { showSuccesToast } from '@/helpers/Toasts';
 
 export default function RutinaHomeScreen() {
   const router = useRouter()
   const [rutinas, setRutinas] = useAppContext()
   const onTrashButtonClick = async (rutina) =>{
-    await deleteRutina(rutina)
-    const newRutinas = rutinas.slice()
-    const index = newRutinas.findIndex(r => r.id === rutina.id)
-    newRutinas.splice(index, 1)
-    setRutinas(newRutinas)
+    try{
+      await deleteRutina(rutina)
+      const newRutinas = rutinas.slice()
+      const index = newRutinas.findIndex(r => r.id === rutina.id)
+      newRutinas.splice(index, 1)
+      setRutinas(newRutinas)
+      showSuccesToast("Rutina eliminada con éxito")
+    }catch(error){
+      //TODO: dar feedback al usuario cuando ocurre un error
+    }
   }
   useEffect(() =>{
     getAllRutinas().then(fetchedRutinas => setRutinas(fetchedRutinas))

@@ -5,6 +5,7 @@ import CircleCheckButton from '@/components/buttons/CircleCheckButton';
 import SaveButton from '@/components/buttons/SaveButton';
 import TextButton from '@/components/buttons/TextButton';
 import RutinaCabeceraItem from '@/components/rutina/RutinaCabeceraItem';
+import { showSuccesToast } from '@/helpers/Toasts';
 import { getCurrentRutinaDetalleAndEjerciciosNames, getNotFinishedRutinaDetalles, getRutina, getRutinaEjercicioWithLastFinishedDetalle, saveAndFinishRutinaCabeceraAndDetalle, saveRutinaCabeceraAndDetalle } from '@/services/RutinasServices';
 import { RutinaDetalleType, RutinaType } from '@/types/types';
 import {useLocalSearchParams, useNavigation, useRouter } from 'expo-router';
