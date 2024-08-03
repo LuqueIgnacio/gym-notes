@@ -40,6 +40,7 @@ export async function addRutina(rutina: RutinaWithRutinaToEjercicioType){
 export async function editRutina(rutina: RutinaWithRutinaToEjercicioType){
     await db.delete(RutinaToEjercicio).where(eq(RutinaToEjercicio.rutinaId, rutina.id))
     await db.insert(RutinaToEjercicio).values(rutina.ejercicios)
+    await db.update(Rutina).set({name: rutina.name}).where(eq(Rutina.id, rutina.id))
 }
 
 export async function deleteRutina(idRutina: unknown){
