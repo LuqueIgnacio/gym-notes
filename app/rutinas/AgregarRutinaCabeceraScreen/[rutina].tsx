@@ -38,7 +38,7 @@ export default function AgregarRutinaCabeceraScreen() {
   const onSave = async () =>{
     try{
       await saveRutinaCabeceraAndDetalle(detalles, rutinaId)
-      //TODO: Dar feedback al usuario sobre el registro guardado.
+      showSuccesToast("Entrenamiento guardado")
     }catch(error){
       //TODO: Dar feedback al usuario sobre el error.
     }
@@ -48,6 +48,7 @@ export default function AgregarRutinaCabeceraScreen() {
     try{
       await saveAndFinishRutinaCabeceraAndDetalle(detalles, rutinaId)
       router.back()
+      showSuccesToast("Entrenamiento finalizado con éxito")
     }catch(e){
       //TODO: Dar feedback al usuario sobre el error.
     }
