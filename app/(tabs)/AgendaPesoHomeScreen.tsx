@@ -6,6 +6,8 @@ import AgregarPesoModal from "@/components/agendaPeso/AgregarPesoModal"
 import uuid from "react-native-uuid"
 import { deletePeso, getLastSevenPesos, savePeso } from "@/services/PesoService"
 import { PesoType } from "@/types/types"
+import Toast from "react-native-toast-message"
+import { showSuccesToast } from "@/helpers/Toasts"
 
 export default function AgendaPesoHomeScreen(){
     //Es importante traer estos datos ordenados de menor a mayor
@@ -25,25 +27,31 @@ export default function AgendaPesoHomeScreen(){
         setModalVisible(false)
     }
     const onSaveButtonPress = async (peso: number, fecha: Date) =>{
-        const id = await savePeso({peso, fecha})
-        const newPeso = {id: id, peso: peso, fecha: fecha}
-        const newPesos = pesos.slice()
-        let index = newPesos.length-1
-        for(let i=index; i>=0; i--){
-            if(fecha.getTime() < newPesos[i].fecha.getTime()){
-                index = i
-            }else{
-                break
+        try{
+            const id = await savePeso({peso, fecha})
+            const newPeso = {id: id, peso: peso, fecha: fecha}
+            const newPesos = pesos.slice()
+            let index = newPesos.length-1
+            for(let i=index; i>=0; i--){
+                if(fecha.getTime() < newPesos[i].fecha.getTime()){
+                    index = i
+                }else{
+                    break
+                }
             }
-        }
 
-        if(index === newPesos.length-1 && fecha.getTime() > newPesos[index].fecha.getTime()){
-            index++
+            if(index === newPesos.length-1 && fecha.getTime() > newPesos[index].fecha.getTime()){
+                index++
+            }
+            newPesos.splice(index, 0, newPeso)
+            if(newPesos.length > 7) newPesos.splice(0, 1)
+            setPesos(newPesos)
+            setModalVisible(false)
+            showSuccesToast("Peso agregado con éxito")
+        }catch(error){
+
         }
-        newPesos.splice(index, 0, newPeso)
-        if(newPesos.length > 7) newPesos.splice(0, 1)
-        setPesos(newPesos)
-        setModalVisible(false)
+        
     }
 
     useEffect( () =>{

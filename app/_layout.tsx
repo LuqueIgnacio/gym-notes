@@ -5,6 +5,7 @@ import migrations from '../drizzle/migrations';
 
 import db from "@/db/database";
 import { AppProvider } from "@/context/AppProvider";
+import Toast from "react-native-toast-message";
 
 
 
@@ -46,6 +47,7 @@ export default function IndexLayout(){
                     options={{title: "Editar Rutina", headerTitleAlign: "center"}}
                 />
             </Stack>
+            <Toast/>
         </AppProvider>
     )
 }
