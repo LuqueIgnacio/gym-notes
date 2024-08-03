@@ -33,3 +33,9 @@ export interface EjercicioDropdownType extends EjercicioType{
     title: string,
     isSelected: boolean
 }
+
+export type PesoType = {
+    id: number,
+    peso: number,
+    fecha: Date
+}
