@@ -17,6 +17,7 @@ export default function IndexLayout(){
 
     useEffect(() =>{
         const checkDBisInitialized = async () =>{
+            //await AsyncStorage.removeItem("initializeddb")
             const isDBinitialized = await AsyncStorage.getItem("initializeddb")
             console.log("hola", isDBinitialized)
             if(!isDBinitialized) initializeDB()

@@ -16,7 +16,7 @@ export const Actividad = sqliteTable("actividad", {
 
 export const Rutina = sqliteTable("rutina", {
     id: blob("id").primaryKey(),
-    name: text("name")
+    name: text("name").unique()
 })
 
 export const rutinaRelations = relations( Rutina, ({many}) =>({
@@ -26,7 +26,7 @@ export const rutinaRelations = relations( Rutina, ({many}) =>({
 
 export const Ejercicio = sqliteTable("ejercicio", {
     id: integer("id").primaryKey({autoIncrement: true}),
-    name: text("name")
+    name: text("name").unique()
 })
 
 export const ejercicioRelations = relations(Ejercicio, ({many}) => ({

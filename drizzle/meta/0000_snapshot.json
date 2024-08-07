@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "5423810d-0974-4117-af55-b93a517e8353",
+  "id": "37fbd569-f7dc-4aaa-9487-6959a6323f94",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "actividad": {
@@ -52,7 +52,15 @@
           "autoincrement": false
         }
       },
-      "indexes": {},
+      "indexes": {
+        "ejercicio_name_unique": {
+          "name": "ejercicio_name_unique",
+          "columns": [
+            "name"
+          ],
+          "isUnique": true
+        }
+      },
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
@@ -105,7 +113,15 @@
           "autoincrement": false
         }
       },
-      "indexes": {},
+      "indexes": {
+        "rutina_name_unique": {
+          "name": "rutina_name_unique",
+          "columns": [
+            "name"
+          ],
+          "isUnique": true
+        }
+      },
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
@@ -147,6 +163,14 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
+        },
+        "finished": {
+          "name": "finished",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": false
         }
       },
       "indexes": {},
@@ -253,7 +277,7 @@
       "columns": {
         "rutinaId": {
           "name": "rutinaId",
-          "type": "integer",
+          "type": "blob",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false

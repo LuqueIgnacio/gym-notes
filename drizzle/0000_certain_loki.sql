@@ -26,6 +26,7 @@ CREATE TABLE `RutinaCabecera` (
 	`fecha` text,
 	`tiempoInicio` text,
 	`tiempoFinal` text,
+	`finished` integer DEFAULT false,
 	FOREIGN KEY (`idRutina`) REFERENCES `rutina`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
@@ -41,9 +42,12 @@ CREATE TABLE `RutinaDetalle` (
 );
 --> statement-breakpoint
 CREATE TABLE `Rutina-Ejercicio` (
-	`rutinaId` integer NOT NULL,
+	`rutinaId` blob NOT NULL,
 	`ejercicioId` integer NOT NULL,
 	PRIMARY KEY(`ejercicioId`, `rutinaId`),
 	FOREIGN KEY (`rutinaId`) REFERENCES `rutina`(`id`) ON UPDATE no action ON DELETE no action,
 	FOREIGN KEY (`ejercicioId`) REFERENCES `ejercicio`(`id`) ON UPDATE no action ON DELETE no action
 );
+--> statement-breakpoint
+CREATE UNIQUE INDEX `ejercicio_name_unique` ON `ejercicio` (`name`);--> statement-breakpoint
+CREATE UNIQUE INDEX `rutina_name_unique` ON `rutina` (`name`);
