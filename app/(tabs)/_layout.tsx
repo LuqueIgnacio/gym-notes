@@ -25,8 +25,9 @@ export default function TabLayout() {
         options={{
           title: 'Rutinas', 
           headerTitleAlign: "center",
+
           tabBarIcon: () => (
-            <DumbellIcon/>
+            <DumbellIcon viewBox={"0.6 3 18 18"}/>
           ),
         }}
       />
