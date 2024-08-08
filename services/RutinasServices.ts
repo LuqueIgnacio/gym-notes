@@ -108,7 +108,7 @@ export async function getCurrentRutinaDetalleAndEjerciciosNames(rutinaId){
             )
         )
         .orderBy(asc(RutinaDetalle.idEjercicio))
-
+    
     const nombreEjercicios: (string|null)[] = []
     const detalles: RutinaDetalleType[] = []
     let currentDetalleIndex = 0
@@ -150,6 +150,12 @@ export async function getRutinaEjercicioWithLastFinishedDetalle(rutinaId){
             )
         )
         .groupBy(RutinaToEjercicio.ejercicioId)
+    if(ids.length === 0){
+        const rutinaToEjercicioIds = await db.select({ejercicioId: RutinaToEjercicio.ejercicioId}).from(RutinaToEjercicio)
+        .where(eq(RutinaToEjercicio.rutinaId, rutinaId))
+
+        return rutinaToEjercicioIds.map(r => null)
+    }
     const results = await db.select().from(RutinaDetalle)
         .innerJoin(RutinaCabecera, eq(RutinaCabecera.id, RutinaDetalle.idRutinaCabecera))
         .where(
@@ -164,7 +170,6 @@ export async function getRutinaEjercicioWithLastFinishedDetalle(rutinaId){
                 })
             )
         )
-
     return results.map(r => r.RutinaDetalle)
 }
 

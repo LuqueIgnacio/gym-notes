@@ -1,7 +1,28 @@
 import { View, Text, TextInput } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 
 export default function RutinaCabeceraItem({index, ejercicioName, currentDetalle, lastDetalle, onInputReps, onInputPeso}) {
+    const [peso, setPeso] = useState<string>(currentDetalle.peso)
+
+    const savePeso = () => {
+        console.log("onSavePeso")
+        const floatRegex = /^-?\d*(\.\d+)?$/;
+        if(floatRegex.test(peso)){
+            onInputPeso(index, parseFloat(peso))
+        }else{
+            setPeso("")
+            onInputPeso(index, null)
+        } 
+    };
+
+    const saveReps = (text) => {
+        let number = parseInt(text)
+        if(isNaN(number)){
+            onInputReps(index, null)
+        }else{
+            onInputReps(index, parseInt(text))
+        }
+    }
     return (
     <View>
         <Text className="text-xl font-bold">{ejercicioName}</Text>
@@ -27,7 +48,7 @@ export default function RutinaCabeceraItem({index, ejercicioName, currentDetalle
                             keyboardType='numeric' 
                             maxLength={3}
                             value={currentDetalle.reps?.toString()}
-                            onChangeText={(text) => onInputReps(index, parseFloat(text))}
+                            onChangeText={(text) => saveReps(text)}
                         >
                             </TextInput>
                         <Text className="p-0.5 text-base">reps</Text>
@@ -38,8 +59,9 @@ export default function RutinaCabeceraItem({index, ejercicioName, currentDetalle
                             placeholder='72.5' 
                             keyboardType='numeric' 
                             maxLength={5}
-                            value={currentDetalle.peso?.toString()}
-                            onChangeText={(text) => onInputPeso(index, parseFloat(text))}
+                            value={peso?.toString()}
+                            onChangeText={(text) => setPeso(text)}
+                            onEndEditing={savePeso}
                         >
                         </TextInput>
                         <Text className="p-0.5 text-base"> kg</Text>
