@@ -6,7 +6,7 @@ const DumbellIcon = (props) => (
     width={props.width}
     height={props.height}
     fill="none"
-    viewBox="3 3 18 18"
+    viewBox={props.viewBox ?? "3 3 18 18"}
     {...props}
   >
     <Path
